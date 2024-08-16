@@ -14,9 +14,6 @@ WORKDIR /tmp/SBFspot
 RUN git checkout $(git describe --tags $(git rev-list --tags --max-count=1))
 
 WORKDIR /tmp/SBFspot/SBFspot
-RUN sed -i s-\#ifdef\ linux-\#ifdef\ linux\\n\#include\ \<sys\/select.h\>- Ethernet.h
-RUN sed -i s-\#ifdef\ linux-\#ifdef\ linux\\n\#include\ \<sys\/select.h\>- bluetooth.h
-RUN sed -i s/mariadbclient/mariadb/ makefile
 
 RUN make nosql && make sqlite && make mysql && make mariadb
 
@@ -32,7 +29,6 @@ RUN make install_nosql && mv /usr/local/bin/sbfspot.3/SBFspot /usr/local/bin/sbf
 RUN apk --no-cache add curl-dev
 
 WORKDIR /tmp/SBFspot/SBFspotUploadDaemon
-RUN sed -i s/mariadbclient/mariadb/ makefile
 
 RUN make sqlite && make mysql && make mariadb
 
@@ -83,10 +79,10 @@ RUN addgroup -g $gid -S $group && adduser -S -D -G $group -H -u $uid $user
 
 RUN chmod g+w /var/log \
       && chgrp $group /var/log
-      
+
 RUN chmod u+x /start.sh \
       && chown $user:$group /start.sh
-      
+
 USER $user
 
 ENTRYPOINT ["/start.sh"]

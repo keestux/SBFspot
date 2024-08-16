@@ -54,7 +54,7 @@ BINDIR     := mariadb/bin/
 OBJDIR     := mariadb/obj/
 OBJECTS    := $(SRC_MARIADB:%.cpp=$(OBJDIR)%.o)
 CFLAGS     := $(CFLAGS) -DUSE_MYSQL
-LIBS       := $(LIBS) mariadbclient
+LIBS       := $(LIBS) mariadb
 else ifeq ($(MAKECMDGOALS),install_nosql)
 BINDIR     := nosql/bin/
 else ifeq ($(MAKECMDGOALS),install_sqlite)
