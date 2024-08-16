@@ -91,7 +91,7 @@ install_mariadb: init_install install
 init_build:
 	$(CMD_TESTDIR) $(OBJDIR) $(CMD_MKDIR) $(OBJDIR)
 	$(CMD_TESTDIR) $(BINDIR) $(CMD_MKDIR) $(BINDIR)
-	
+
 init_install:
 	$(CMD_TESTDIR) $(INSTALLDIR) $(CMD_MKDIR) $(INSTALLDIR)
 
@@ -111,7 +111,7 @@ endif
 ifeq ($(MAKECMDGOALS),install_mariadb)
 	$(CMD_COPY) *MySQL*.sql $(INSTALLDIR)
 endif
-	
+
 $(OBJDIR)%.o: %.cpp
 	$(CXX) $^ $(CFLAGS) -o $@ $(addprefix -I,$(INCDIR))
 
